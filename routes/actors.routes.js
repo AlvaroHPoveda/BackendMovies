@@ -2,8 +2,9 @@ const express = require('express');
 
 // Controllers
 const {
-  getAllActors,
   createNewActor,
+  getAllActors,
+  getActorById, 
   updateActor,
   deleteActor
 } = require('../controllers/actors.controller');
@@ -11,8 +12,9 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllActors);
 router.post('/', createNewActor);
+router.get('/', getAllActors);
+router.get('/:id', getActorById);
 router.patch('/:id', updateActor);
 router.delete('/:id', deleteActor);
 

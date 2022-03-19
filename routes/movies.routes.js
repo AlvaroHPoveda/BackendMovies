@@ -4,6 +4,7 @@ const express = require('express');
 const {
   getAllMovies,
   createNewMovie,
+  getMoviesById,
   updateMovie,
   deleteMovie
 } = require('../controllers/movies.controller');
@@ -11,8 +12,9 @@ const {
 
 const router = express.Router();
 
-router.get('/', getAllMovies);
 router.post('/', createNewMovie);
+router.get('/', getAllMovies);
+router.get('/:id', getMoviesById);
 router.patch('/:id', updateMovie);
 router.delete('/:id', deleteMovie);
 

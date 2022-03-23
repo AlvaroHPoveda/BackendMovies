@@ -17,6 +17,4 @@ app.use('/api/v1/actors', actorsRouter);
 app.use('/api/v1/movies', moviesRouter);
 app.use('/api/v1/users', usersRouter);
 
-app.use(globalErrorHandler);
-
 module.exports = { app };

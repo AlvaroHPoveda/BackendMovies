@@ -17,7 +17,7 @@ Objective: Prepare the routers and controllers functions
   b) For PATCH and DELETE, must provide an id
 
 2. Create actors controller file, with the following functions
-  a) getAllActors
+  a) getAllActors, getActorById
   b) createNewActor
   c) updateActor
   d) deleteActor
@@ -43,3 +43,15 @@ Objective: Create CRUD controller functions for actors
   NOTE: Password must be encrypted for users
   NOTE: Update user fields (username, email)
   NOTE: Update movie fields (title, description, duration, genre)
+
+Activity #4:
+
+Objective: Implemente login authorization
+
+  a) Install jsonwebtoken library
+  b) Create a login endpoint for user
+  c) Verify that credentials (email and password) are valid
+  d) Generate JWT and send it on the response
+  e) Create a middleware that validates the token
+
+  Apply this middleware on the endpoint that gets all actors to see if it works.

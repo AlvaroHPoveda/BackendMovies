@@ -1,4 +1,8 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config({path:'./config.env'});
 
 // Models
 const { Users } = require('../models/users.model');
@@ -6,7 +10,6 @@ const { Users } = require('../models/users.model');
 // Utils
 const { catchAsync } = require('../util/catchAsync');
 const { AppError } = require('../util/appError');
-const { password } = require('pg/lib/defaults');
 
 exports.createNewUser = catchAsync(
   async (req, res, next) => {
@@ -21,7 +24,7 @@ exports.createNewUser = catchAsync(
       );
     }
 
-    const salt = await bcrypt.getSalt(12)
+    const salt = await bcrypt.genSalt(12);
 
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -32,6 +35,8 @@ exports.createNewUser = catchAsync(
       role
     });
 
+    newUsers.password = undefined;
+
     res.status(201).json({
       status: 'success',
       data: { newUsers }
@@ -40,7 +45,8 @@ exports.createNewUser = catchAsync(
 );
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await Users.findAll({
-    where: { status: 'active' }
+    where: { status: 'active' },
+    attributes: {exclude:['password']}
   });
   res.status(200).json({
     status: 'sucess',
@@ -99,4 +105,34 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
   await users.update({ status: 'deleted' });
 
   res.status(204).json({ status: 'success' });
+});
+
+exports.loginUser = catchAsync(async(req,res,next)=>{
+  const { email, password }=req.body;
+
+  //Find user given an email and has status active
+  const user = await Users.findOne({
+    where: { email, status: 'active'}
+  });
+  
+  //Compare entered password vs hashed password
+  if(!user || !(await bcrypt.compare(password, user.password))){
+    return next(new AppError(400, 'Credentials arer invalid'));
+  }
+
+  //Create JWT
+  const token = await jwt.sign(
+    { id: user.id}, //Token payload
+    process.env.JWT_SECRET, //Secret key
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN
+    }
+  );
+
+    res.status(200).json({
+      status: 'success',
+      data: {token}
+    });
+
+
 });

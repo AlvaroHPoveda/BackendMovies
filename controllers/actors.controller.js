@@ -1,11 +1,14 @@
+const { ref, uploadBytes} = require('firebase/storage');
+
 // Models
 const { Actors } = require('../models/actors.model');
-const { Reviews } = require('../models/reviews.model');
+const { Movies } = require('../models/movies.model');
 
 // Utils
 const { catchAsync } = require('../util/catchAsync');
 const { AppError } = require('../util/appError');
-const { filterObj } = require('../util/filterObj');
+const { storage } = require('../util/firebase');
+/*const { filterObj } = require('../util/filterObj');*/
 
 exports.createNewActor = catchAsync(
   async (req, res, next) => {
@@ -20,11 +23,22 @@ exports.createNewActor = catchAsync(
       );
     }
 
+    const imgRef = ref(
+      storage,
+      `imgs/${Date.now()}-${req.file.originalname}`
+    );
+
+    const result = await uploadBytes(
+      imgRef,
+      req.file.buffer
+    );
+
     const newActors = await Actors.create({
       name,
       country,
       rating,
-      age
+      age,
+      profilePic: result.metadata.fullPath
     });
 
     res.status(201).json({
@@ -37,7 +51,9 @@ exports.getAllActors = catchAsync(
   async (req, res, next) => {
     const actors = await Actors.findAll({
       where: { status: 'active' }
+      /*include: [{ model: Movies }]*/
     });
+
     res.status(200).json({
       status: 'sucess',
       data: { actors }

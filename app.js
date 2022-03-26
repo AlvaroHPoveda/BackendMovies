@@ -11,10 +11,13 @@ const { usersRouter } = require('./routes/users.routes');
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Endpoints
 app.use('/api/v1/actors', actorsRouter);
 app.use('/api/v1/movies', moviesRouter);
 app.use('/api/v1/users', usersRouter);
+
+app.use(globalErrorHandler);
 
 module.exports = { app };

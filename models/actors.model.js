@@ -24,10 +24,10 @@ const Actors = sequelize.define('actor', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  /*profilePic: {
+  profilePic: {
     type: DataTypes.STRING(100),
     allowNull: false
-  },*/
+  },
   status: {
     type: DataTypes.STRING(10),
     defaultValue: 'active',

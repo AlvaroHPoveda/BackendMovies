@@ -8,14 +8,19 @@ const ActorsinMovie = sequelize.define('actorsinMovie', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  userId: {
+  actorId: {
     type: DataTypes.INTEGER,  
     allowNull: false
   },
-  moviesId: {
+  movieId: {
     type: DataTypes.INTEGER,  
     allowNull: false
   },
+  status: {
+    type: DataTypes.STRING(10),
+    defaultValue: 'active',
+    allowNull: false
+  }
 });
 
 module.exports = {ActorsinMovie };

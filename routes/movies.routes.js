@@ -9,11 +9,16 @@ const {
   deleteMovie
 } = require('../controllers/movies.controller');
 
+/*const {
+  validateSession
+} = require('../middlewares/auth.middleware');*/
+
 const { upload } = require('../util/multer');
 
 const router = express.Router();
+//router.use(validateSession);
 
-router.post('/', upload.single('postImg'), createNewMovie);
+router.post('/', upload.single('img'), createNewMovie);
 router.get('/', getAllMovies);
 router.get('/:id', getMoviesById);
 router.patch('/:id', updateMovie);

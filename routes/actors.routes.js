@@ -11,9 +11,14 @@ const {
 
 const { upload } = require('../util/multer');
 
-const router = express.Router();
+/*const {
+  validateSession
+} = require('../middlewares/auth.middleware');*/
 
-router.post('/', upload.single('postImg'), createNewActor);
+const router = express.Router();
+//router.use(validateSession);
+
+router.post('/', upload.single('profilePic'), createNewActor);
 router.get('/', getAllActors);
 router.get('/:id', getActorById);
 router.patch('/:id', updateActor);

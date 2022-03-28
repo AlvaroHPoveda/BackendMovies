@@ -45,7 +45,7 @@ exports.getAllreviews = catchAsync(
 
     res.status(200).json({
       status: 'sucess',
-      data:  reviews 
+      data: reviews
     });
   }
 );

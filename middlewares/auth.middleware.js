@@ -54,3 +54,13 @@ exports.validateSession = catchAsync(
     next();
   }
 );
+exports.validateSessionAdmin = catchAsync(
+  async (req, res, next) => {
+    if (req.currentUser.role !== 'admin') {
+      return next(
+        new AppError(401, 'Invalid session administrator')
+      );
+    }
+    next();
+  }
+);

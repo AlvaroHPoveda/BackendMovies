@@ -8,8 +8,12 @@ const {
 const { actorsRouter } = require('./routes/actors.routes');
 const { moviesRouter } = require('./routes/movies.routes');
 const { usersRouter } = require('./routes/users.routes');
-const { reviewsRouter } = require('./routes/reviews.routes');
-const { actorinMoviesRouter } = require('./routes/actorsinMovie.routes');
+const {
+  reviewsRouter
+} = require('./routes/reviews.routes');
+const {
+  actorinMoviesRouter
+} = require('./routes/actorsinMovie.routes');
 
 const app = express();
 app.use(express.json());

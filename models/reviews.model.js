@@ -22,11 +22,11 @@ const Reviews = sequelize.define('review', {
     allowNull: false
   },
   userId: {
-    type: DataTypes.INTEGER,  
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   movieId: {
-    type: DataTypes.INTEGER,  
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   status: {

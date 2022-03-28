@@ -9,11 +9,11 @@ const ActorsinMovie = sequelize.define('actorsinMovie', {
     allowNull: false
   },
   actorId: {
-    type: DataTypes.INTEGER,  
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   movieId: {
-    type: DataTypes.INTEGER,  
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   status: {
@@ -23,4 +23,4 @@ const ActorsinMovie = sequelize.define('actorsinMovie', {
   }
 });
 
-module.exports = {ActorsinMovie };
+module.exports = { ActorsinMovie };

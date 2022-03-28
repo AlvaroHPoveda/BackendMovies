@@ -9,12 +9,14 @@ const {
   deleteActorinMovie
 } = require('../controllers/actorsinMovie.controller');
 
-/*const {
-  validateSession
-} = require('../middlewares/auth.middleware');*/
+const {
+  validateSession,
+  validateSessionAdmin
+} = require('../middlewares/auth.middleware');
 
 const router = express.Router();
-//router.use(validateSession);
+router.use(validateSession);
+router.use(validateSessionAdmin);
 
 router.post('/', createNewActorinMovies);
 router.get('/', getAllActorinMovies);

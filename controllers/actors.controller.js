@@ -61,7 +61,7 @@ exports.getAllActors = catchAsync(
       include: [{ model: Movies, through: ActorsinMovie }]
     });
 
-   // console.log(actors);
+    // console.log(actors);
 
     // Promise[]
     const actorsPromises = actors.map(
@@ -135,7 +135,7 @@ exports.getActorById = catchAsync(
       country,
       rating,
       age,
-      profilePic:imgDownloadUrl,
+      profilePic: imgDownloadUrl,
       createdAt,
       updatedAt,
       movies

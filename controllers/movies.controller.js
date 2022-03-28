@@ -22,7 +22,6 @@ exports.createNewMovie = catchAsync(
     const { title, description, duration, rating, genre } =
       req.body;
 
-    console.log('hola mundo');
     if (
       !title ||
       !description ||
@@ -74,7 +73,7 @@ exports.getAllMovies = catchAsync(
         { model: Actors, through: ActorsinMovie },
         { model: Reviews }
       ]
-    });  
+    });
 
     // Promise[]
     const moviesPromises = movies.map(
